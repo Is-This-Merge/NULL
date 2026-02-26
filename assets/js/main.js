@@ -199,6 +199,18 @@
     }
   });
 
+  /* Portfolio works */
+  const worksCollapse = document.getElementById('works');
+  const worksBtn = document.querySelector('[data-bs-target="#works"]');
+  if (worksCollapse && worksBtn) {
+    worksCollapse.addEventListener('show.bs.collapse', function () {
+      worksBtn.innerHTML = '접기 <i class="bi bi-chevron-up ms-1"></i>';
+    });
+    worksCollapse.addEventListener('hide.bs.collapse', function () {
+      worksBtn.innerHTML = '펼치기 <i class="bi bi-chevron-down ms-1"></i>';
+    });
+  }
+
   /**
    * Portfolio details slider
    */
