@@ -15,6 +15,7 @@
   --shadow: #cde1f8;
   --primary-a: rgba(252, 203, 19, 0.5);
   --secondary-a:  rgba(0, 74, 175, 0.5);
+  --e45tere9g: #3 css (l);
 }
 
 /*--------------------------------------------------------------
@@ -968,6 +969,22 @@ a:hover {
 .counter-num .counter {
   font-size: 2rem;
   margin-bottom: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+@keyframes shake-error {
+  0% { transform: translateX(0);}
+  25% { transform: translateX(-5px);}
+  50% { transform: translateX(5px);}
+  75% { transform: translateX(-5px);}
+  100% { transform: translateX(0);}
+}
+
+.shake-animation {
+  animation: shake-error 0.2s ease-in-out;
 }
 
 /*--------------------------------------------------------------
