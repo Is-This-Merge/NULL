@@ -202,69 +202,56 @@
   /* Portfolio works */
   document.addEventListener("DOMContentLoaded", () => {
     const worksData = [
-      [
-        { date: '2025.11.08', title: 'OPEN SASA 부스 운영: 나를 죽게 만든 건 & MAD HOUSE', fold: false },
-        { date: '2023.05.16', title: 'Linux 학습 OverTheWire: Wargame', fold: false },
-        { date: '2022.06.30', title: 'FlutterFlow 학습 / 앱 제작', fold: true },
-        { date: '2021.05.13', title: 'C언어 강의 재능기부', fold: true }
-      ],
-      [
-        { date: '2025.09.26', title: '정보과학의 날: CODE The Day 부스 운영', fold: false },
-        { date: '2022.10.28', title: 'OPEN SASA 부스 운영 및 앱 개발', fold: false },
-        { date: '2022.05.12', title: 'C언어 강의 영상 제작', fold: true }
-      ],
-      [
-        { date: '2023.11.11', title: 'OPEN SASA 부스 운영: ESCAPE & 노래방탈출', fold: false },
-        { date: '2022.10.07', title: '달빛사사 개발', fold: false },
-        { date: '2021.08.28', title: '더 지니어스: SASA 개최', fold: true }
-      ]
+      { date: '2025.11.08', title: 'OPEN SASA 부스 운영: 나를 죽게 만든 건 & MAD HOUSE', fold: false },
+      { date: '2025.09.26', title: '정보과학의 날: CODE The Day 부스 운영', fold: false },
+      { date: '2023.11.11', title: 'OPEN SASA 부스 운영: ESCAPE & 노래방탈출', fold: false },
+      { date: '2023.05.16', title: 'Linux 학습 OverTheWire: Wargame', fold: false },
+      { date: '2022.10.28', title: 'OPEN SASA 부스 운영 및 앱 개발', fold: false },
+      { date: '2022.10.07', title: '달빛사사 개발', fold: false },
+      { date: '2022.06.30', title: 'FlutterFlow 학습 / 앱 제작', fold: true },
+      { date: '2022.05.12', title: 'C언어 강의 영상 제작', fold: true },
+      { date: '2021.08.28', title: '더 지니어스: SASA 개최', fold: true },
+      { date: '2021.05.13', title: 'C언어 강의 재능기부', fold: true }
     ];
-
     const worksContainer = document.getElementById('works');
     if (!worksContainer) return;
-    worksData.forEach(colItems => {
-      const colDiv = document.createElement('div');
-      colDiv.className = 'col-md-4';
-
-      let colHTML = '';
-
-      colItems.forEach(item => {
-        const imgNum = item.date.substring(2).replace(/\./g, '');
-        const imgSrc = `assets/img/work-${imgNum}.jpg`;
-        const displayDate = `${item.date}.`; 
-        const collapseClass = item.fold ? ' collapse' : '';
-        const collapseId = item.fold ? ' id="fold"' : '';
-        colHTML += `
-          <div class="work-box${collapseClass}"${collapseId}>
+    let htmlContent = '';
+    worksData.forEach((item) => {
+      const imgNum = item.date.substring(2).replace(/\./g, '');
+      const imgSrc = `assets/img/work-${imgNum}.jpg`;
+      const displayDate = `${item.date}.`; 
+      const colClass = item.fold ? 'col-md-4 mb-4 collapse multi-collapse' : 'col-md-4 mb-4';
+      htmlContent += `
+        <div class="${colClass}">
+          <div class="work-box h-100 d-flex flex-column" style="margin-bottom: 0;">
             <a href="${imgSrc}" data-gallery="portfolioGallery" class="portfolio-lightbox">
-              <div class="work-img"><img src="${imgSrc}" alt="" class="img-fluid"></div>
+              <div class="work-img">
+                <img src="${imgSrc}" alt="" class="img-fluid w-100" style="aspect-ratio: 2/1; object-fit: cover;">
+              </div>
             </a>
-            <div class="work-content">
-              <div class="row">
-                <div class="col-sm-10">
+            <div class="work-content d-flex flex-column flex-grow-1">
+              <div class="row h-100">
+                <div class="col-sm-10 d-flex flex-column justify-content-between h-100">
                   <h2 class="w-title">${item.title}</h2>
-                  <div class="w-more">${displayDate}</div>
+                  <div class="w-more mt-auto pt-2">${displayDate}</div>
                 </div>
               </div>
             </div>
           </div>
-        `;
+        </div>
+      `;
+    });
+    worksContainer.innerHTML = htmlContent;
+    const worksBtn = document.querySelector('[data-bs-target=".multi-collapse"]');
+    if (worksBtn) {
+      worksContainer.addEventListener('show.bs.collapse', function () {
+        worksBtn.innerHTML = '접기 <i class="bi bi-chevron-up ms-1"></i>';
       });
-      colDiv.innerHTML = colHTML;
-      worksContainer.appendChild(colDiv);
-    });
+      worksContainer.addEventListener('hide.bs.collapse', function () {
+        worksBtn.innerHTML = '펼치기 <i class="bi bi-chevron-down ms-1"></i>';
+      });
+    }
   });
-  
-  const worksCollapse = document.getElementById('fold');
-  const worksBtn = document.querySelector('[data-bs-target="#fold"]');
-  if (worksCollapse && worksBtn) {
-    worksCollapse.addEventListener('show.bs.collapse', function () {
-      worksBtn.innerHTML = '접기 <i class="bi bi-chevron-up ms-1"></i>';
-    });
-    worksCollapse.addEventListener('hide.bs.collapse', function () {
-      worksBtn.innerHTML = '펼치기 <i class="bi bi-chevron-down ms-1"></i>';
-    });
-  }
 
   /**
    * Portfolio details slider
