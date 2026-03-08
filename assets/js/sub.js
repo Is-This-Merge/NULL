@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const now = new Date();
 const hour = now.getHours();
-if (hour >= 0 && hour < 2) {
+if (hour < 2 || hour >= 22) {
     titleEl.innerHTML = "2스터에그 #2<br> 야행성 (u)"
     document.getElementsByClassName("hero-content")[0].style = "background: linear-gradient(135deg, var(--secondary) 70%, var(--primary) 100%);"
 }
